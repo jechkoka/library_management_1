@@ -10,10 +10,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name, "Nom" %>
-    <%= form.text_field :name, required: true %>
-  </div>
+    <div class="field">
+    <%= form.label :firstname, "Prénom" %>
+    <%= form.text_field :firstname, required: true %>
+    </div>
+
+    <div class="field">
+    <%= form.label :lastname, "Nom" %>
+    <%= form.text_field :lastname, required: true %>
+    </div>
 
   <div class="field">
     <%= form.label :email, "Email" %>
