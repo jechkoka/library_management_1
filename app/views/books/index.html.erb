@@ -1,33 +1,82 @@
-# app/views/books/index.html.erb
-<h1>Liste des livres</h1>
+<div class="page-header">
+  <h1>Catalogue de livres</h1>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Titre</th>
-      <th>Auteur</th>
-      <th>Catégorie</th>
-      <th>Disponibilité</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td><%= book.category %></td>
-        <td><%= book.available ? 'Disponible' : 'Emprunté' %></td>
-        <td>
-          <%= link_to 'Voir', book %>
-          <%= link_to 'Modifier', edit_book_path(book) %>
-          <%= link_to 'Supprimer', book, method: :delete, data: { confirm: 'Êtes-vous sûr?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="search-filters">
+  <%= form_with(url: books_path, method: :get, local: true) do |form| %>
+    <div class="search-box">
+      <%= form.text_field :search, placeholder: "Rechercher par titre ou auteur", value: params[:search] %>
+      <%= form.submit "Rechercher" %>
+    </div>
+    
+    <div class="filters">
+      <%= form.label :available, "Disponibilité:" %>
+      <%= form.select :available, 
+          options_for_select([
+            ["Tous", ""],
+            ["Disponibles", "true"],
+            ["Empruntés", "false"]
+          ], params[:available]), {}, { onchange: "this.form.submit();" } %>
+          
+      <%= form.label :category, "Catégorie:" %>
+      <%= form.select :category,
+          options_for_select([
+            ["Toutes", ""],
+            ["Roman", "Roman"],
+            ["Science-Fiction", "Science-Fiction"],
+            ["Fantasy", "Fantasy"],
+            ["Policier", "Policier"],
+            ["Biographie", "Biographie"],
+            ["Histoire", "Histoire"],
+            ["Jeunesse", "Jeunesse"],
+            ["Sciences", "Sciences"],
+            ["Art", "Art"],
+            ["BD", "BD"],
+            ["Manga", "Manga"],
+            ["Autre", "Autre"]
+          ], params[:category]), {}, { onchange: "this.form.submit();" } %>
+    </div>
+  <% end %>
+</div>
 
-<br>
+<div class="books-list">
+  <% if @books.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Auteur</th>
+          <th>Catégorie</th>
+          <th>Année</th>
+          <th>Disponibilité</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr class="<%= book.available ? 'available' : 'unavailable' %>">
+            <td><%= link_to book.title, book %></td>
+            <td><%= book.author %></td>
+            <td><%= book.category %></td>
+            <td><%= book.published_year %></td>
+            <td><%= book.available ? 'Disponible' : 'Emprunté' %></td>
+            <td class="actions">
+              <%= link_to 'Voir', book, class: 'button show' %>
+              <%= link_to 'Modifier', edit_book_path(book), class: 'button edit' %>
+              <%= link_to 'Supprimer', book, method: :delete, data: { confirm: 'Êtes-vous sûr? Cette action est irréversible.' }, class: 'button delete' %>
+              <% if book.available? %>
+                <%= link_to 'Emprunter', new_loan_path(book_id: book.id), class: 'button borrow' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="no-results">Aucun livre ne correspond à votre recherche.</p>
+  <% end %>
+</div>
 
-<%= link_to 'Nouveau Livre', new_book_path %>
+<div class="actions">
+  <%= link_to 'Ajouter un nouveau livre', new_book_path, class: 'button add' %>
+</div>
