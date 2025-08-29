@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<div class="user-details">
+  <h1><%= @user.name %></h1>
+  
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Téléphone:</strong>
+    <%= @user.phone %>
+  </p>
+</div>
+
+<h2>Emprunts en cours</h2>
+<% if @active_loans.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Livre</th>
+        <th>Auteur</th>
+        <th>Emprunté le</th>
+        <th>Date de retour prévue</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_loans.each do |loan| %>
+        <tr class="<%= Date.today > loan.due_date ? 'overdue' : '' %>">
+          <td><%= link_to loan.book.title, loan.book %></td>
+          <td><%= loan.book.author %></td>
+          <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
+          <td><%= loan.due_date.strftime("%d/%m/%Y") %></td>
+          <td>
+            <% if Date.today > loan.due_date %>
+              <span class="overdue">En retard</span>
+            <% else %>
+              En cours
+            <% end %>
+          </td>
+          <td class="actions">
+            <%= link_to 'Retourner', return_book_path(loan), method: :patch, 
+                        data: { confirm: 'Confirmer le retour de ce livre?' }, 
+                        class: 'button return' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Cet utilisateur n'a pas d'emprunts en cours.</p>
+<% end %>
+
+<h2>Historique des emprunts</h2>
+<% if @past_loans.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Livre</th>
+        <th>Auteur</th>
+        <th>Emprunté le</th>
+        <th>Retourné le</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @past_loans.each do |loan| %>
+        <tr>
+          <td><%= link_to loan.book.title, loan.book %></td>
+          <td><%= loan.book.author %></td>
+          <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
+          <td><%= loan.returned_on.strftime("%d/%m/%Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Cet utilisateur n'a pas d'historique d'emprunts.</p>
+<% end %>
+
+<div class="actions">
+  <%= link_to 'Nouvel emprunt', new_loan_path(user_id: @user.id), class: 'button add' %>
+  <%= link_to 'Modifier', edit_user_path(@user), class: 'button edit' %>
+  <%= link_to 'Retour', users_path, class: 'button back' %>
+</div>
