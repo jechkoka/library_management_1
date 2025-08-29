@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h1>Modifier un utilisateur</h1>
+</div>
+
+<div class="form-container">
+  <%= render 'form', user: @user %>
+</div>
+
+<div class="actions">
+  <%= link_to 'Voir', @user, class: 'button show' %>
+  <%= link_to 'Retour à la liste', users_path, class: 'button back' %>
+</div>
