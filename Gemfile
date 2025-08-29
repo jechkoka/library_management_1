@@ -26,6 +26,10 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# la gem sassc est requise par votre application 
+# pour compiler les fichiers SCSS (KOJE 29/08/2025)
+gem 'sassc-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
