@@ -23,6 +23,12 @@ class LoansController < ApplicationController
     @loan.due_date = Date.today + 14.days # Par défaut, emprunt pour 14 jours
     @loan.status = 'emprunté'
     
+    # Vérifier si l'utilisateur peut emprunter plus de livres
+    unless @loan.user.can_borrow?
+      redirect_to @loan.user, alert: "Cet utilisateur a atteint sa limite d'emprunts."
+      return
+    end
+    
     # Vérifier si le livre est disponible
     book = Book.find(loan_params[:book_id])
     
