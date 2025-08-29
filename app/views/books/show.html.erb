@@ -59,7 +59,7 @@
     <tbody>
       <% @book.loans.order(borrowed_on: :desc).each do |loan| %>
         <tr>
-          <td><%= link_to loan.user.name, loan.user %></td>
+          <td><%= link_to loan.user.full_name, loan.user %></td>
           <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
           <td><%= loan.returned_on ? loan.returned_on.strftime("%d/%m/%Y") : "-" %></td>
           <td><%= loan.status %></td>

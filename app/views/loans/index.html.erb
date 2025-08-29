@@ -20,7 +20,7 @@
         <% @active_loans.each do |loan| %>
           <tr class="<%= Date.today > loan.due_date ? 'overdue' : '' %>">
             <td><%= link_to loan.book.title, loan.book %></td>
-            <td><%= link_to loan.user.name, loan.user %></td>
+            <td><%= link_to loan.user.full_name, loan.user %></td>
             <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
             <td><%= loan.due_date.strftime("%d/%m/%Y") %></td>
             <td>
@@ -33,8 +33,8 @@
             <td class="actions">
               <%= link_to 'Voir', loan, class: 'button show' %>
               <%= link_to 'Retourner', return_book_path(loan), method: :patch, 
-                          data: { confirm: 'Confirmer le retour de ce livre?' }, 
-                          class: 'button return' %>
+            data: { turbo_method: :patch, turbo_confirm: 'Confirmer le retour de ce livre?' }, 
+            class: 'button return' %>
             </td>
           </tr>
         <% end %>
