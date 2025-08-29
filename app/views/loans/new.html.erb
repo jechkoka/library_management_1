@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Nouvel emprunt</h1>
+</div>
+
+<div class="form-container">
+  <% if @available_books.empty? %>
+    <div class="alert">
+      <p>Aucun livre n'est disponible pour l'emprunt.</p>
+    </div>
+  <% else %>
+    <%= render 'form', loan: @loan %>
+  <% end %>
+</div>
+
+<div class="actions">
+  <%= link_to 'Retour à la liste', loans_path, class: 'button back' %>
+</div>

@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<div class="loan-details">
+  <h1>Détails de l'emprunt</h1>
+  
+  <div class="loan-info">
+    <h2>Livre</h2>
+    <p>
+      <strong>Titre:</strong>
+      <%= link_to @loan.book.title, @loan.book %>
+    </p>
+    <p>
+      <strong>Auteur:</strong>
+      <%= @loan.book.author %>
+    </p>
+    <p>
+      <strong>ISBN:</strong>
+      <%= @loan.book.isbn %>
+    </p>
+  </div>
+
+  <div class="loan-info">
+    <h2>Emprunteur</h2>
+    <p>
+      <strong>Nom:</strong>
+      <%= link_to @loan.user.name, @loan.user %>
+    </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @loan.user.email %>
+    </p>
+    <p>
+      <strong>Téléphone:</strong>
+      <%= @loan.user.phone %>
+    </p>
+  </div>
+
+  <div class="loan-info">
+    <h2>Informations d'emprunt</h2>
+    <p>
+      <strong>Emprunté le:</strong>
+      <%= @loan.borrowed_on.strftime("%d/%m/%Y") %>
+    </p>
+    <p>
+      <strong>Date de retour prévue:</strong>
+      <%= @loan.due_date.strftime("%d/%m/%Y") %>
+    </p>
+    <p>
+      <strong>Statut:</strong>
+      <% if @loan.returned_on.present? %>
+        Retourné le <%= @loan.returned_on.strftime("%d/%m/%Y") %>
+      <% elsif Date.today > @loan.due_date %>
+        <span class="overdue">En retard</span>
+      <% else %>
+        En cours
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<div class="actions">
+  <% if @loan.returned_on.nil? %>
+    <%= link_to 'Marquer comme retourné', return_book_path(@loan), method: :patch, 
+                data: { confirm: 'Confirmer le retour de ce livre?' }, 
+                class: 'button return' %>
+  <% end %>
+  <% if @loan.returned_on.nil? %>
+    <%= link_to 'Modifier', edit_loan_path(@loan), class: 'button edit' %>
+  <% end %>
+  <%= link_to 'Retour', loans_path, class: 'button back' %>
+</div>

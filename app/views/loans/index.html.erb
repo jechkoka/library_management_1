@@ -1,0 +1,82 @@
+<div class="page-header">
+  <h1>Gestion des emprunts</h1>
+</div>
+
+<div class="loans-section">
+  <h2>Emprunts en cours</h2>
+  <% if @active_loans.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Livre</th>
+          <th>Utilisateur</th>
+          <th>Emprunté le</th>
+          <th>À retourner le</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @active_loans.each do |loan| %>
+          <tr class="<%= Date.today > loan.due_date ? 'overdue' : '' %>">
+            <td><%= link_to loan.book.title, loan.book %></td>
+            <td><%= link_to loan.user.name, loan.user %></td>
+            <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
+            <td><%= loan.due_date.strftime("%d/%m/%Y") %></td>
+            <td>
+              <% if Date.today > loan.due_date %>
+                <span class="overdue">En retard</span>
+              <% else %>
+                En cours
+              <% end %>
+            </td>
+            <td class="actions">
+              <%= link_to 'Voir', loan, class: 'button show' %>
+              <%= link_to 'Retourner', return_book_path(loan), method: :patch, 
+                          data: { confirm: 'Confirmer le retour de ce livre?' }, 
+                          class: 'button return' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Aucun emprunt en cours.</p>
+  <% end %>
+</div>
+
+<div class="loans-section">
+  <h2>Historique des emprunts</h2>
+  <% if @past_loans.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Livre</th>
+          <th>Utilisateur</th>
+          <th>Emprunté le</th>
+          <th>Retourné le</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @past_loans.each do |loan| %>
+          <tr>
+            <td><%= link_to loan.book.title, loan.book %></td>
+            <td><%= link_to loan.user.name, loan.user %></td>
+            <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
+            <td><%= loan.returned_on.strftime("%d/%m/%Y") %></td>
+            <td class="actions">
+              <%= link_to 'Voir', loan, class: 'button show' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Aucun historique d'emprunt.</p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <%= link_to 'Nouvel emprunt', new_loan_path, class: 'button add' %>
+</div>
