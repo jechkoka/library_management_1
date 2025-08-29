@@ -1,0 +1,56 @@
+<%= form_with(model: book, local: true) do |form| %>
+  <% if book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(book.errors.count, "erreur") %> ont empêché l'enregistrement de ce livre:</h2>
+      <ul>
+        <% book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, "Titre" %>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :author, "Auteur" %>
+    <%= form.text_field :author, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description, rows: 5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :isbn, "ISBN" %>
+    <%= form.text_field :isbn %>
+  </div>
+
+  <div class="field">
+    <%= form.label :published_year, "Année de publication" %>
+    <%= form.number_field :published_year, min: 0, max: Date.today.year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category, "Catégorie" %>
+    <%= form.select :category, 
+      [
+        "Roman", "Science-Fiction", "Fantasy", "Policier", "Biographie", 
+        "Histoire", "Jeunesse", "Sciences", "Art", "BD", "Manga", "Autre"
+      ],
+      { include_blank: "Sélectionnez une catégorie" } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available, "Disponible" %>
+    <%= form.check_box :available %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Enregistrer" %>
+  </div>
+<% end %>
