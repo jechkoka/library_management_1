@@ -1,4 +1,14 @@
 /* app/assets/stylesheets/application.scss */
+// application.scss
+
+// Import des fichiers SCSS spécifiques
+@import "books";
+@import "users";
+@import "loans";
+@import "home";
+
+// Autres imports...
+
 /* Styles généraux */
 
 * {
