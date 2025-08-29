@@ -4,6 +4,21 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    
+    # Recherche par titre ou auteur
+    if params[:search].present?
+      @books = @books.where('title ILIKE ? OR author ILIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+    
+    # Filtre par disponibilité
+    if params[:available].present?
+      @books = @books.where(available: params[:available] == "true")
+    end
+    
+    # Filtre par catégorie
+    if params[:category].present?
+      @books = @books.where(category: params[:category])
+    end
   end
 
   def show
