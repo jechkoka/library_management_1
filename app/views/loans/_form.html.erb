@@ -19,7 +19,7 @@
 
   <div class="field">
     <%= form.label :user_id, "Utilisateur" %>
-    <%= form.collection_select :user_id, @users, :id, :name, 
+    <%= form.collection_select :user_id, @users, :id, :full_name, 
                               { prompt: "Sélectionner un utilisateur" }, 
                               { required: true } %>
   </div>
