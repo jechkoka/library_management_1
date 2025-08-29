@@ -1,0 +1,80 @@
+<div class="home-hero">
+  <h1>Bienvenue dans la Gestion de Bibliothèque</h1>
+  <p>Gérez efficacement votre collection de livres et les emprunts</p>
+</div>
+
+<div class="dashboard">
+  <div class="stats-container">
+    <div class="stat-box">
+      <h3>Livres</h3>
+      <div class="stat-number"><%= Book.count %></div>
+      <div class="stat-detail">
+        <span class="available"><%= Book.where(available: true).count %> disponibles</span>
+        <span class="unavailable"><%= Book.where(available: false).count %> empruntés</span>
+      </div>
+      <%= link_to "Gérer les livres", books_path, class: "button" %>
+    </div>
+
+    <div class="stat-box">
+      <h3>Utilisateurs</h3>
+      <div class="stat-number"><%= User.count %></div>
+      <div class="stat-detail">
+        <span>Actifs: <%= User.joins(:loans).where(loans: { returned_on: nil }).distinct.count %></span>
+      </div>
+      <%= link_to "Gérer les utilisateurs", users_path, class: "button" %>
+    </div>
+
+    <div class="stat-box">
+      <h3>Emprunts</h3>
+      <div class="stat-number"><%= Loan.where(returned_on: nil).count %></div>
+      <div class="stat-detail">
+        <span class="overdue">En retard: <%= Loan.where(returned_on: nil).where("due_date < ?", Date.today).count %></span>
+      </div>
+      <%= link_to "Gérer les emprunts", loans_path, class: "button" %>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Actions rapides</h2>
+    <div class="action-buttons">
+      <%= link_to "Ajouter un livre", new_book_path, class: "button add" %>
+      <%= link_to "Ajouter un utilisateur", new_user_path, class: "button add" %>
+      <%= link_to "Enregistrer un emprunt", new_loan_path, class: "button add" %>
+    </div>
+  </div>
+</div>
+
+<% if Loan.where(returned_on: nil).where("due_date < ?", Date.today).exists? %>
+  <div class="overdue-section">
+    <h2>Emprunts en retard</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Livre</th>
+          <th>Utilisateur</th>
+          <th>Date d'échéance</th>
+          <th>Jours de retard</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Loan.where(returned_on: nil).where("due_date < ?", Date.today).order(:due_date).limit(5).each do |loan| %>
+          <tr>
+            <td><%= link_to loan.book.title, loan.book %></td>
+            <td><%= link_to loan.user.name, loan.user %></td>
+            <td><%= loan.due_date.strftime("%d/%m/%Y") %></td>
+            <td><%= (Date.today - loan.due_date).to_i %> jours</td>
+            <td>
+              <%= link_to 'Retourner', return_book_path(loan), method: :patch, class: 'button return' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if Loan.where(returned_on: nil).where("due_date < ?", Date.today).count > 5 %>
+      <p class="see-more">
+        <%= link_to "Voir tous les emprunts en retard", loans_path(overdue: true) %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
