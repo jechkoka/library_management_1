@@ -1,0 +1,51 @@
+<div class="page-header">
+  <h1>Liste des utilisateurs</h1>
+</div>
+
+<div class="search-filters">
+  <%= form_with(url: users_path, method: :get, local: true) do |form| %>
+    <div class="search-box">
+      <%= form.text_field :search, placeholder: "Rechercher par nom ou email", value: params[:search] %>
+      <%= form.submit "Rechercher" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="users-list">
+  <% if @users.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Emprunts en cours</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user %></td>
+            <td><%= user.email %></td>
+            <td><%= user.phone %></td>
+            <td><%= user.loans.where(returned_on: nil).count %></td>
+            <td class="actions">
+              <%= link_to 'Voir', user, class: 'button show' %>
+              <%= link_to 'Modifier', edit_user_path(user), class: 'button edit' %>
+              <%= link_to 'Supprimer', user, method: :delete, 
+                          data: { confirm: 'Êtes-vous sûr? Cette action est irréversible et supprimera toutes les données associées.' }, 
+                          class: 'button delete' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="no-results">Aucun utilisateur ne correspond à votre recherche.</p>
+  <% end %>
+</div>
+
+<div class="actions">
+  <%= link_to 'Ajouter un nouvel utilisateur', new_user_path, class: 'button add' %>
+</div>
