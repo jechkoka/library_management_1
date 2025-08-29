@@ -1,0 +1,125 @@
+/* app/assets/stylesheets/home.scss */
+.home-hero {
+    text-align: center;
+    margin-bottom: 40px;
+    
+    h1 {
+      font-size: 2.5em;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      font-size: 1.2em;
+      color: #7f8c8d;
+    }
+  }
+  
+  .dashboard {
+    margin-bottom: 50px;
+  }
+  
+  .stats-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  .stat-box {
+    flex: 1;
+    min-width: 200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 10px 20px 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+    
+    h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #3498db;
+      margin-bottom: 10px;
+    }
+    
+    .stat-detail {
+      margin-bottom: 15px;
+      color: #7f8c8d;
+      
+      span {
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      .available {
+        color: #27ae60;
+      }
+      
+      .unavailable {
+        color: #e74c3c;
+      }
+      
+      .overdue {
+        color: #e74c3c;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  .quick-actions {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      
+      .button {
+        margin: 10px;
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .overdue-section {
+    background-color: #fff0f0;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    
+    h2 {
+      color: #c0392b;
+      margin-bottom: 20px;
+    }
+    
+    .see-more {
+      text-align: right;
+      margin-top: 15px;
+      
+      a {
+        color: #e74c3c;
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
