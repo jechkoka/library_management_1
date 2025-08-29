@@ -74,7 +74,7 @@
     <% if Loan.where(returned_on: nil).where("due_date < ?", Date.today).count > 5 %>
       <p class="see-more">
         <%= link_to "Voir tous les emprunts en retard", loans_path(overdue: true) %>
-      </p>
+      </p> 
     <% end %>
   </div>
 <% end %>
