@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
   
   def can_borrow?
-    active_loans.count < 5  # Limite de 5 emprunts simultanés par exemple
+    loans.where(returned_on: nil).count < 5  # Limite à 5 emprunts simultanés
   end
   
   def overdue_loans
