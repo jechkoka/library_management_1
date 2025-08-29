@@ -1,4 +1,5 @@
 /* Styles pour les utilisateurs */
+/* app/assets/stylesheets/users.scss */
 .users-list table {
     width: 100%;
     border-collapse: collapse;
@@ -12,4 +13,15 @@
   
   .user-details {
     margin-bottom: 30px;
+  }
+  
+  /* Style pour les messages d'avertissement */
+  span.warning {
+    color: #e74c3c;
+    font-weight: bold;
+    background-color: #fff0f0;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 5px 0;
   }
