@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h1>Modifier un livre</h1>
+</div>
+
+<div class="form-container">
+  <%= render 'form', book: @book %>
+</div>
+
+<div class="actions">
+  <%= link_to 'Voir', @book, class: 'button show' %>
+  <%= link_to 'Retour à la liste', books_path, class: 'button back' %>
+</div>
