@@ -1,0 +1,33 @@
+# app/views/books/index.html.erb
+<h1>Liste des livres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Catégorie</th>
+      <th>Disponibilité</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.category %></td>
+        <td><%= book.available ? 'Disponible' : 'Emprunté' %></td>
+        <td>
+          <%= link_to 'Voir', book %>
+          <%= link_to 'Modifier', edit_book_path(book) %>
+          <%= link_to 'Supprimer', book, method: :delete, data: { confirm: 'Êtes-vous sûr?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nouveau Livre', new_book_path %>
