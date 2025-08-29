@@ -39,7 +39,7 @@
     <% current_loan = @book.loans.where(returned_on: nil).first %>
     <p>
       <strong>Actuellement emprunté par:</strong>
-      <%= link_to current_loan.user.name, current_loan.user %> 
+      <%= link_to current_loan.user.full_name, current_loan.user %> 
       jusqu'au <%= current_loan.due_date.strftime("%d/%m/%Y") %>
     </p>
   <% end %>
