@@ -23,11 +23,11 @@ books = [
 
 created_books = books.map { |book| Book.create!(book) }
 
-# Créer des utilisateurs
+# Créer des utilisateurs (avec firstname et lastname au lieu de name)
 users = [
-  { name: 'Jean Dupont', email: 'jean@exemple.fr', phone: '0123456789' },
-  { name: 'Marie Martin', email: 'marie@exemple.fr', phone: '0987654321' },
-  { name: 'Pierre Durand', email: 'pierre@exemple.fr', phone: '0654321987' }
+  { firstname: 'Jean', lastname: 'Dupont', email: 'jean@exemple.fr', phone: '0123456789' },
+  { firstname: 'Marie', lastname: 'Martin', email: 'marie@exemple.fr', phone: '0987654321' },
+  { firstname: 'Pierre', lastname: 'Durand', email: 'pierre@exemple.fr', phone: '0654321987' }
 ]
 
 created_users = users.map { |user| User.create!(user) }
