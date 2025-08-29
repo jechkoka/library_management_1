@@ -1,0 +1,35 @@
+<%= form_with(model: loan, local: true) do |form| %>
+  <% if loan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(loan.errors.count, "erreur") %> ont empêché l'enregistrement de cet emprunt:</h2>
+      <ul>
+        <% loan.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :book_id, "Livre" %>
+    <%= form.collection_select :book_id, @available_books, :id, :title, 
+                              { prompt: "Sélectionner un livre" }, 
+                              { required: true } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id, "Utilisateur" %>
+    <%= form.collection_select :user_id, @users, :id, :name, 
+                              { prompt: "Sélectionner un utilisateur" }, 
+                              { required: true } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :due_date, "Date de retour prévue" %>
+    <%= form.date_field :due_date, value: Date.today + 14.days, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Enregistrer l'emprunt" %>
+  </div>
+<% end %>
