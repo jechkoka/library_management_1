@@ -1,0 +1,80 @@
+<p id="notice"><%= notice %></p>
+
+<div class="book-details">
+  <h1><%= @book.title %></h1>
+  
+  <p>
+    <strong>Auteur:</strong>
+    <%= @book.author %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @book.description %>
+  </p>
+
+  <p>
+    <strong>ISBN:</strong>
+    <%= @book.isbn %>
+  </p>
+
+  <p>
+    <strong>Année de publication:</strong>
+    <%= @book.published_year %>
+  </p>
+
+  <p>
+    <strong>Catégorie:</strong>
+    <%= @book.category %>
+  </p>
+
+  <p>
+    <strong>Statut:</strong>
+    <span class="<%= @book.available ? 'available' : 'unavailable' %>">
+      <%= @book.available ? 'Disponible' : 'Emprunté' %>
+    </span>
+  </p>
+
+  <% if @book.loans.any? && !@book.available? %>
+    <% current_loan = @book.loans.where(returned_on: nil).first %>
+    <p>
+      <strong>Actuellement emprunté par:</strong>
+      <%= link_to current_loan.user.name, current_loan.user %> 
+      jusqu'au <%= current_loan.due_date.strftime("%d/%m/%Y") %>
+    </p>
+  <% end %>
+</div>
+
+<h2>Historique des emprunts</h2>
+<% if @book.loans.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Utilisateur</th>
+        <th>Date d'emprunt</th>
+        <th>Date de retour</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @book.loans.order(borrowed_on: :desc).each do |loan| %>
+        <tr>
+          <td><%= link_to loan.user.name, loan.user %></td>
+          <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
+          <td><%= loan.returned_on ? loan.returned_on.strftime("%d/%m/%Y") : "-" %></td>
+          <td><%= loan.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Ce livre n'a jamais été emprunté.</p>
+<% end %>
+
+<div class="actions">
+  <% if @book.available? %>
+    <%= link_to 'Emprunter ce livre', new_loan_path(book_id: @book.id), class: 'button borrow' %>
+  <% end %>
+  <%= link_to 'Modifier', edit_book_path(@book), class: 'button edit' %>
+  <%= link_to 'Retour', books_path, class: 'button back' %>
+</div>
