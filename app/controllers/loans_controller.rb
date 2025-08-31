@@ -1,6 +1,6 @@
 # app/controllers/loans_controller.rb
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show, :edit, :update, :destroy, :return_book]
+  before_action :set_loan, only: [:show, :edit, :update, :destroy, :return_book, :confirm_return]
 
   def index
     @active_loans = Loan.where(returned_on: nil).order(due_date: :asc)
@@ -77,6 +77,11 @@ class LoansController < ApplicationController
     
     @loan.destroy
     redirect_to loans_path, notice: 'Emprunt supprimé avec succès.'
+  end
+
+  def confirm_return
+    # Cette méthode affiche simplement la page de confirmation
+    # @loan est déjà défini par before_action :set_loan
   end
 
   def return_book
