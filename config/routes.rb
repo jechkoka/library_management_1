@@ -6,8 +6,9 @@ Rails.application.routes.draw do
     resources :users
     resources :loans
     
-    # Route pour marquer un livre comme retourné
-    patch '/loans/:id/return', to: 'loans#return_book', as: 'return_book'
+  # Routes pour gérer le retour de livre
+  get 'loans/:id/confirm_return', to: 'loans#confirm_return', as: 'confirm_return_book'
+  patch 'loans/:id/return', to: 'loans#return_book', as: 'return_book'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

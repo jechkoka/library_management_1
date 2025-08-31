@@ -32,9 +32,9 @@
             </td>
             <td class="actions">
               <%= link_to 'Voir', loan, class: 'button show' %>
-              <%= link_to 'Retourner', return_book_path(loan), method: :patch, 
-            data: { turbo_method: :patch, turbo_confirm: 'Confirmer le retour de ce livre?' }, 
-            class: 'button return' %>
+              <%= form_with(url: "/loans/#{loan.id}/return", method: :patch, class: "button-form") do |form| %>
+                <%= form.submit "Retourner", class: "button return", data: { confirm: 'Confirmer le retour de ce livre?' } %>
+              <% end %>
             </td>
           </tr>
         <% end %>
