@@ -17,6 +17,7 @@
         <h1 class="site-title">Bibliothèque</h1>
         <nav class="main-nav">
           <ul>
+            <li><%= link_to "Accueil", root_path %></li>
             <li><%= link_to "Livres", books_path %></li>
             <li><%= link_to "Utilisateurs", users_path %></li>
             <li><%= link_to "Emprunts", loans_path %></li>
@@ -42,7 +43,7 @@
 
     <footer class="main-footer">
       <div class="container">
-        <p>&copy; <%= Date.today.year %> Gestion de Bibliothèque</p>
+        <p>&copy; <%= Date.today.year %> / Gestion de Bibliothèque / JCK </p>
       </div>
     </footer>
   </body>
