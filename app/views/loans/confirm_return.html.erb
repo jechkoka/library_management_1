@@ -23,8 +23,9 @@
   </div>
   
   <div class="actions">
-    <%= form_with(url: return_book_path(@loan), method: :patch) do %>
-      <%= submit_tag "Confirmer le retour", class: "button return" %>
+    <%= form_with(url: return_book_path(@loan), method: :patch, data: { turbo: false }) do |form| %>
+      <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
+      <%= form.submit "Confirmer le retour", class: "button return" %>
     <% end %>
     
     <%= link_to "Annuler", loans_path, class: "button back" %>
