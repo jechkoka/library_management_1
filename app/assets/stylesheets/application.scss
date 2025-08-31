@@ -1,4 +1,4 @@
-/* app/assets/stylesheets/application.scss */
+/* filepath: /Users/KOJE/Documents/Ruby_2024/Ruby_App/Ruby_Tuto_Yann_12.07.2024/Ruby_Exo_Yann_290724/library_management_1/app/assets/stylesheets/application.scss */
 // application.scss
 
 // Import des fichiers SCSS spécifiques
@@ -12,172 +12,190 @@
 /* Styles généraux */
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
-  /* Header & Navigation */
-  .main-header {
-    background-color: #2c3e50;
-    padding: 15px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-  }
-  
-  .site-title {
-    color: white;
-    margin: 0;
-    font-size: 24px;
-    float: left;
-  }
-  
-  .main-nav {
-    float: right;
-  }
-  
-  .main-nav ul {
-    list-style: none;
-    display: flex;
-  }
-  
-  .main-nav li {
-    margin-left: 20px;
-  }
-  
-  .main-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-  
-  .main-nav a:hover {
-    color: #3498db;
-  }
-  
-  /* Main content */
-  main {
-    padding: 20px 0;
-    min-height: calc(100vh - 170px);
-  }
-  
-  /* Footer */
-  .main-footer {
-    background-color: #2c3e50;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  /* Flash messages */
-  .flash {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-  }
-  
-  .flash.notice {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .flash.alert {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  /* Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  table th,
-  table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    text-align: left;
-  }
-  
-  table tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Forms */
-  .form-container {
-    background-color: white;
-    padding: 25px;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-  }
-  
-  .field {
-    margin-bottom: 20px;
-  }
-  
-  .field label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .field input,
-  .field textarea,
-  .field select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .actions {
-    margin-top: 20px;
-  }
-  
-  /* Buttons */
-  .button {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-right: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .button:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Clear floats */
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header & Navigation - MODIFIÉ */
+.main-header {
+  background-color: #2c3e50;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  height: auto;
+  position: relative;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px;
+  height: 70px; /* Augmente la hauteur */
+}
+
+.site-title {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+  display: inline-block;
+}
+
+.main-nav {
+  display: inline-block;
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  height: 100%;
+  align-items: center;
+}
+
+.main-nav li {
+  margin-left: 25px; /* Plus d'espace entre les éléments */
+  position: relative;
+}
+
+.main-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  padding: 10px 5px; /* Ajoute du padding vertical */
+  display: inline-block;
+}
+
+.main-nav a:hover {
+  color: #3498db;
+}
+
+/* Main content - MODIFIÉ */
+main {
+  padding: 20px 0;
+  min-height: calc(100vh - 170px);
+  clear: both; /* Empêche le chevauchement avec des éléments flottants */
+  margin-top: 20px; /* Espace supplémentaire après le header */
+}
+
+/* Le reste des styles reste inchangé */
+.main-footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Flash messages */
+.flash {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.flash.notice {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+}
+
+table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Forms */
+.form-container {
+  background-color: white;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
