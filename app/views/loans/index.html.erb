@@ -1,3 +1,4 @@
+<%# app/views/loans/index.html.erb %>
 <div class="page-header">
   <h1>Gestion des emprunts</h1>
 </div>
@@ -32,9 +33,7 @@
             </td>
             <td class="actions">
               <%= link_to 'Voir', loan, class: 'button show' %>
-              <%= form_with(url: "/loans/#{loan.id}/return", method: :patch, class: "button-form") do |form| %>
-                <%= form.submit "Retourner", class: "button return", data: { confirm: 'Confirmer le retour de ce livre?' } %>
-              <% end %>
+              <%= link_to 'Retourner', confirm_return_book_path(loan), class: 'button return' %>
             </td>
           </tr>
         <% end %>
@@ -62,7 +61,7 @@
         <% @past_loans.each do |loan| %>
           <tr>
             <td><%= link_to loan.book.title, loan.book %></td>
-            <td><%= link_to loan.user.name, loan.user %></td>
+            <td><%= link_to loan.user.full_name, loan.user %></td>
             <td><%= loan.borrowed_on.strftime("%d/%m/%Y") %></td>
             <td><%= loan.returned_on.strftime("%d/%m/%Y") %></td>
             <td class="actions">
